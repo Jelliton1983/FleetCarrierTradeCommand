@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Frontier Authorization — Fleet Carrier Trade Command</title>
+  <link rel="stylesheet" href="../style.css">
+  <meta name="robots" content="noindex,nofollow">
+</head>
+<body>
+<header class="compact">
+  <div class="wrap">
+    <p class="eyebrow">FLEET CARRIER TRADE COMMAND</p>
+    <h1>Frontier Authorization</h1>
+    <p class="lead" id="status">Processing the authorization response…</p>
+  </div>
+</header>
+<main class="wrap policy">
+  <section>
+    <h2 id="heading">Authorization callback received</h2>
+    <p id="message">This page is the secure HTTPS return point for Frontier OAuth. You may return to Fleet Carrier Trade Command.</p>
+    <p class="small">This page does not request or store your Frontier password.</p>
+  </section>
+</main>
+<script>
+(() => {
+  const q = new URLSearchParams(location.search);
+  const heading = document.getElementById('heading');
+  const status = document.getElementById('status');
+  const message = document.getElementById('message');
+  if (q.has('error')) {
+    heading.textContent = 'Authorization was not completed';
+    status.textContent = 'Frontier returned an authorization error.';
+    message.textContent = 'Return to Fleet Carrier Trade Command and try signing in again.';
+  } else if (q.has('code')) {
+    heading.textContent = 'Authorization approved';
+    status.textContent = 'Frontier returned the authorization response successfully.';
+    message.textContent = 'Return to Fleet Carrier Trade Command to finish connecting your account.';
+  } else {
+    heading.textContent = 'OAuth callback ready';
+    status.textContent = 'Fleet Carrier Trade Command OAuth return endpoint is online.';
+    message.textContent = 'This endpoint is ready to receive a Frontier authorization response.';
+  }
+})();
+</script>
+</body>
+</html>
